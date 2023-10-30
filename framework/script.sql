@@ -5,12 +5,13 @@ USE CHECKLISTER;
 
 CREATE TABLE CHECKLIST(
     
-    id_checklist int UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id_checklist int UNSIGNED AUTO_INCREMENT,
     titulo VARCHAR(255) NOT NULL,
     data_hora_criacao DATETIME NOT NULL,
-    versao_checklist varchar(255) NOT NULL, --fazer autoincremento
-    autor_vesao varchar(255) NOT NULL
+    versao_checklist int UNSIGNED, 
+    autor_vesao varchar(255) NOT NULL,
 
+    PRIMARY KEY (id_checklist, versao_checklist)
 );
 
 CREATE TABLE AVALIACAO(

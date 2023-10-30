@@ -4,12 +4,14 @@
     $SGBD_USERNAME = "root";
     $SGBD_PASSWORD = "";
     $SGBD_DATABASE = "checklister";
+    $conn;
 
     function conectarBancoDados() {
         global $SGBD_SERVERNAME;
         global $SGBD_USERNAME;
         global $SGBD_PASSWORD;
         global $SGBD_DATABASE;
+        global $conn;
 
         try{
             $conn = mysqli_connect($SGBD_SERVERNAME, $SGBD_USERNAME, $SGBD_PASSWORD, $SGBD_DATABASE);
