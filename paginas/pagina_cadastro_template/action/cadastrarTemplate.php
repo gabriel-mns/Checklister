@@ -19,7 +19,7 @@
         array_push($arrayGravidadeNaoConformidade,          $_POST["gravidade"                  . $contador]);
         array_push($arrayPrazoDiasAtenderNaoConformidade,   $_POST["prazoDias"                  . $contador]);
 
-        $contador = $contador + 1;
+        $contador += 1;
     } while(isset($_POST["descricao" . $contador]));
 
     $insertQueryTabelaChecklist = 
@@ -27,24 +27,47 @@
             INSERT INTO checklist (titulo, data_hora_criacao, autor_vesao, versao_checklist) 
             VALUES ("$tituloTemplate", NOW(), "$nomeAutorVersao", 1);
         END;
-    
-    echo $insertQueryTabelaChecklist;
 
     mysqli_begin_transaction($conn);
 
-    // Tenta realizar INSERTs
     try {
-        // Inserir na tabela CHECKLIST
         mysqli_query($conn, $insertQueryTabelaChecklist);
 
-        // Obter ID gerado automaticamente na inserção na tabela CHECKLIST
         $idGeradoAutomaticamenteTabelaChecklist = mysqli_insert_id($conn);
 
-        // $insertQueryTabelaChecklist = 
-        //     <<<END
-        //         INSERT INTO checklist (titulo, data_hora_criacao, autor_vesao, versao_checklist) 
-        //         VALUES ("$tituloTemplate", NOW(), "$nomeAutorVersao", 1);
-        //     END;
+        $insertQueryTabelaChecklistItem = 
+            <<<END
+                INSERT INTO checklist_item (id_checklist, descricao, nome_responsavel_correcao, gravidade_nao_conformidade, prazo_em_dias) VALUES 
+            END;
+
+        for ($i = 0; $i < count($arrayDescricao); $i++) {
+            $insertQueryTabelaChecklistItem .= 
+                <<<END
+                    (
+                        $idGeradoAutomaticamenteTabelaChecklist,
+                        "$arrayDescricao[$i]",
+                        "$arrayNomeResponsavelCorrecao[$i]",
+                        "$arrayGravidadeNaoConformidade[$i]",
+                        $arrayPrazoDiasAtenderNaoConformidade[$i]
+                    )
+                END;
+            if ($i == (count($arrayDescricao) - 1)) {
+                $insertQueryTabelaChecklistItem .=
+                    <<<END
+                        ;
+                    END;
+            } else {
+                $insertQueryTabelaChecklistItem .=
+                    <<<END
+                        ,
+                    END;
+            }
+        }
+
+        echo $insertQueryTabelaChecklistItem;
+
+        mysqli_query($conn, $insertQueryTabelaChecklistItem);
+        
 
         // alert("Usuário cadastrado com sucesso!");
         mysqli_commit($conn); 
