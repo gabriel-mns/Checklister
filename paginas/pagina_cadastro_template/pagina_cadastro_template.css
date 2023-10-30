@@ -8,7 +8,6 @@ html {
 }
 
 .body {
-    font-size: 20px;
     margin: 0px auto 0px auto;
     min-height: 100vh;
     max-width: 1083px;
@@ -39,3 +38,6 @@ html {
     border-radius: 6px;
 }
 
+.label-adicionar-novo-item {
+    font-size: 20px;
+}
