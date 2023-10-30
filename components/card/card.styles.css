@@ -3,6 +3,7 @@
     border: 1px solid #198754;
     padding: 18px 22px;
     background-color: #EFEFEF;
+    
 }
 
 .card-container-template-cadastrado {
@@ -13,6 +14,13 @@
 
 .cor-fundo-verde-claro {
     background-color: #DFEBE5;
+}
+
+.card-container:hover {
+    transform: scale(1.05);
+    transition: all .2s ease-in-out;
+    border-color: rgb(35, 209, 35);
+    opacity: 90%;
 }
 
 .card-container, .card-link-novo-card  {

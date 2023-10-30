@@ -78,5 +78,5 @@
         // alert("Houve um erro ao cadastrar o usuário. Tente novamente mais tarde.");
     }
     
-
+    header("Location: ../../pagina_principal/index.php");
 ?>

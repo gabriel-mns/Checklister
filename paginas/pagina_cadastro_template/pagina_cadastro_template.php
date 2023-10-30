@@ -77,10 +77,12 @@
                 name="salvar">
                 Salvar
             </button>
-            <button type="submit" class="btn btn-outline-danger" id="cancelar" 
-                name="cancelar">
-                Cancelar
-            </button>
+            <a href="../pagina_principal/index.php" class="botao-cancelar">
+                <button type="button" class="btn btn-outline-danger" id="cancelar" 
+                    name="cancelar">
+                    Cancelar
+                </button>
+            </a>
         </div>
     </form>
 

@@ -41,3 +41,7 @@ html {
 .label-adicionar-novo-item {
     font-size: 20px;
 }
+
+.botao-cancelar {
+    text-decoration: none;
+}
