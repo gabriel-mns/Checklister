@@ -1,4 +1,4 @@
-var contador = 0;
+var contador = 1;
 
 function adicionarNovoChecklistItem() {
     const template = `

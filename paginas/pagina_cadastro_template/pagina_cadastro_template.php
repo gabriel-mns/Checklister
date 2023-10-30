@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <div id="div-insercao"></div>
+        <div id="div-insercao"></div> <!-- Aqui que pagina_cadastro_template.js vai adicionar novos checklist items ao clicar no botão de Adicionar -->
     </div>
 
     <div>
