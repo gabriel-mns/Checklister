@@ -1,0 +1,26 @@
+.card-container {
+    height: 300px;
+    border: 1px solid #198754;
+    padding: 18px 22px;
+    background-color: #DFEBE5;
+}
+
+.card-container, .card-link-novo-card  {
+    /* max-width: 225px; */
+    flex-grow: 1;
+}
+
+.card-iconePlus {
+    margin-top: 15px;
+    color: #198754;
+}
+
+.card-titulo {
+    font-size: 25px;
+    font-weight: regular;
+    color: #198754;
+}
+
+.card-link-novo-card {
+    text-decoration: none;
+}

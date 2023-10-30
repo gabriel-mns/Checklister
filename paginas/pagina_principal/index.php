@@ -13,13 +13,13 @@
 </head>
 
 <body class="body">
-<?php 
-    usarComponenteComParametros('barra_navegacao', ['vermelho']); 
-?>
+<?php usarComponenteComParametros('barra_navegacao', ['vermelho']); ?>
 
 <div class="container-conteudo">
-    <h1 class="titulo">Templates dos checklits</h1>
-    <!-- Coloque seu código aqui -->
+    <h1 class="titulo">Templates dos checklists</h1>
+
+    <?php usarComponenteComParametros('grid_cards', []); ?>
+    
 </div>
 </body>
 </html>
