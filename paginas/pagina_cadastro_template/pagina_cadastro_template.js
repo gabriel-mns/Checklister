@@ -15,8 +15,8 @@ function adicionarNovoChecklistItem() {
 
 
             <div class="mb-3">
-                <label for="gravidade0" class="form-label">Gravidade da não-conformidade:</label>
-                <select class="form-select" name="gravidade0" id="gravidade0">
+                <label for="gravidade${contador}" class="form-label">Gravidade da não-conformidade:</label>
+                <select class="form-select" name="gravidade${contador}" id="gravidade${contador}">
                     <option value="1">Baixa</option>
                     <option value="2">Média</option>
                     <option value="3"selected>Alta</option>
@@ -25,8 +25,8 @@ function adicionarNovoChecklistItem() {
 
             
             <div class="mb-3">
-                <label for="prazoDias0" class="form-label">Gravidade da não-conformidade:</label>
-                <input class="form-control" type="number" name="prazoDias0" id="prazoDias0" step=1>
+                <label for="prazoDias${contador}" class="form-label">Prazo em dias para atender a não-conformidade:</label>
+                <input class="form-control" type="number" name="prazoDias${contador}" id="prazoDias${contador}" step=1>
             </div>
         </div>
     `;
