@@ -18,7 +18,7 @@
 <div class="container-conteudo">
     <h1 class="titulo">Templates dos checklists</h1>
 
-    <?php usarComponenteComParametros('grid_cards', []); ?>
+    <?php usarComponenteComParametros('grid_cards', ["template"]); ?>
     
 </div>
 </body>

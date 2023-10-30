@@ -62,4 +62,16 @@
             </script>
         END;
     }
+
+    function buscarTodosTemplatesCadastrados() {
+        global $conn;
+
+        $queryBuscarTodosTemplates =
+            <<<END
+                SELECT *
+                FROM checklist;
+            END;
+        
+        return mysqli_query($conn, $queryBuscarTodosTemplates);
+    }
 ?>
