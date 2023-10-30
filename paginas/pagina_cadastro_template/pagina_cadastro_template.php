@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <?php include('../../framework/checklister_framework.php'); ?>
     <link rel="stylesheet" href="./pagina_cadastro_template.css">
+    <script src="./pagina_cadastro_template.js"></script>
 </head>
 
 <body class="body">
@@ -37,6 +38,7 @@
                 class="btn btn-success" 
                 id="btn_novo_checklist_item" 
                 name="btn_novo_checklist_item"
+                onclick="adicionarNovoChecklistItem()"
             >
                 +
             </button>
@@ -47,13 +49,14 @@
         
         <div class="container-checklist-item">
             <?php
-                usarComponenteComParametros('input_text_form', ['Descrição:', 'descricao']);
-                usarComponenteComParametros('input_text_form', ['Nome do responsável pela correção:', 'nomeResponsavelCorrecao']);
+                usarComponenteComParametros('input_text_form', ['Descrição:', 'descricao0']);
+                usarComponenteComParametros('input_text_form', ['Nome do responsável pela correção:', 'nomeResponsavelCorrecao0']);
             ?>
 
+
             <div class="mb-3">
-                <label for="" class="form-label">Gravidade da não-conformidade:</label>
-                <select class="form-select" aria-label="Default select example">
+                <label for="gravidade0" class="form-label">Gravidade da não-conformidade:</label>
+                <select class="form-select" name="gravidade0" id="gravidade0">
                     <option value="1">Baixa</option>
                     <option value="2">Média</option>
                     <option value="3"selected>Alta</option>
@@ -62,10 +65,12 @@
 
             
             <div class="mb-3">
-                <label for="prazoDias" class="form-label">Gravidade da não-conformidade:</label>
-                <input class="form-control" type="number" name="prazoDias" id="prazoDias" step=1>
+                <label for="prazoDias0" class="form-label">Gravidade da não-conformidade:</label>
+                <input class="form-control" type="number" name="prazoDias0" id="prazoDias0" step=1>
             </div>
         </div>
+
+        <div id="div-insercao"></div>
     </div>
 
     <div>
