@@ -1,6 +1,7 @@
 <?php 
     #Imports
     include("conexaoBancoDados.php");
+    include("api_checklister_framework.php");
 
     #Declaração e atribuição das variáveis globais
     $DIRETORIO_RAIZ = $_SERVER['DOCUMENT_ROOT'] . '/Checklister';
@@ -61,17 +62,5 @@
         echo <<<END
             </script>
         END;
-    }
-
-    function buscarTodosTemplatesCadastrados() {
-        global $conn;
-
-        $queryBuscarTodosTemplates =
-            <<<END
-                SELECT *
-                FROM checklist;
-            END;
-        
-        return mysqli_query($conn, $queryBuscarTodosTemplates);
     }
 ?>
