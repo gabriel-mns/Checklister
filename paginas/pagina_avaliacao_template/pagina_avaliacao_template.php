@@ -57,7 +57,7 @@
         <h1 class="versao">Versão template: <?=$versao_template?>.0</h1>
     </div>
 
-    <form id="formCadAvaliacaoTemplate" action="./action/cadastrarTemplate.php" method="post" enctype="multipart/form-data">
+    <form id="formCadAvaliacaoTemplate" action="./action/cadastrarAvaliacao.php" method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
             <label for="autor" class="form-label input_text_form-label">Autor da versão atual do template:</label>
@@ -73,8 +73,6 @@
             usarComponenteComParametros('input_text_form', ['Nome do avaliador:', 'nome_avaliador']);
             usarComponenteComParametros('input_text_form', ['Versão do artefato:', 'versao_artefato']); 
         ?>
-        
-        <hr>
 
         <div class="mb-3">
             <?php
@@ -90,7 +88,7 @@
                     $prazo_em_dias = $arrayChecklistItem[3];
 
                     echo <<<END
-                        <div class="container-checklist-item">
+                        <div class="container-checklist-item mb-3">
                             <div class="mb-3">
                                 <label for="descricao$contador" class="form-label input_text_form-label">Descrição:</label>
                                 <input type="text" class="form-control" id="descricao$contador" name="descricao$contador" disabled value="$descricao">
@@ -127,15 +125,13 @@
                                 <textarea class="form-control" id="observacao$contador" name="observacao$contador" rows="3"></textarea>
                             </div>
 
+                            
 
                         </div>
                     END;
-                }
+                    $contador++;
+                }       
             ?>
-
-
-
-            <div id="div-insercao"></div> <!-- Aqui que pagina_cadastro_template.js vai adicionar novos checklist items ao clicar no botão de Adicionar -->
         </div>
 
         <div>
