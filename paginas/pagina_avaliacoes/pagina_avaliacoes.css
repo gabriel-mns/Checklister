@@ -1,0 +1,21 @@
+html {
+    min-height: 100%;
+    background-color: #D1D1D1;
+}
+
+.body {
+
+    margin: 0px auto 0px auto;
+    min-height: 100vh;
+    max-width: 1083px;
+    background-color: #DEDEDE;
+}
+
+.container-conteudo {
+    padding: 30px 60px 100px 60px;
+}
+
+.titulo {
+    font-size: 30px;
+    margin-bottom: 30px;
+}
