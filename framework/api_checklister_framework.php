@@ -153,8 +153,8 @@
             VALUES(
                 {$idChecklist},
                 NOW(),
-                {$versaoArtefato},
-                {$nomeAvaliador}
+                '{$versaoArtefato}',
+                '{$nomeAvaliador}'
             ) 
             
         ";
@@ -167,6 +167,8 @@
 
         global $conn;
 
+        $isConforme = $isConforme? '1' : '0';
+
         $queryInsertChecklistItem = "
 
             INSERT INTO
@@ -175,13 +177,39 @@
                 {$idAvaliacao},
                 {$idChecklistItem},
                 {$isConforme},
-                {$observacao}
+                '{$observacao}'
             ) 
             
         ";
 
         mysqli_query($conn, $queryInsertChecklistItem);
 
+    }
+
+    function cadastrarAvaliacaoCompleta(string $nomeAvaliador, string $versaoArtefato, int $idChecklist, array $avaliacoes){
+
+        global $conn;
+
+        //Começa a transaction de cadastrar Avaliação com Itens Avaliados
+        mysqli_begin_transaction($conn);
+
+        cadastrarAvaliacao($nomeAvaliador, $versaoArtefato, $idChecklist);
+
+        $idAvaliacao     = mysqli_insert_id($conn);
+
+        // Para cada avaliacao no array de avaliações, inserir avaliação no banco.
+        foreach($avaliacoes as $itensDeAvaliacao){
+
+            $idChecklistItem = $itensDeAvaliacao[0];
+            $isConforme      = $itensDeAvaliacao[1];
+            $observacao      = $itensDeAvaliacao[2];
+
+            cadastrarAvaliacaoChecklistItem($idAvaliacao, $idChecklistItem, $isConforme, $observacao);
+
+        }
+
+        //Commita a transaction de cadastrar Avaliação com Itens Avaliados
+        mysqli_commit($conn);
     }
 
 ?>
