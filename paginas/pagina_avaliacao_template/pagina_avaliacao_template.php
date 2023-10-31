@@ -15,8 +15,8 @@
 
 <?php
     // TODO: NO ARGUMENTO DAS FUNÇÕES ABAIXO TINHA QUE SER O ID OBTIDO PELO MÉTODO GET OU POST
-    $resultTemplate         = buscarDadosDaChecklist(2);
-    $resultChecklistItems   = buscarCheckListItemsDaChecklist(2);
+    $resultTemplate         = buscarDadosDaChecklist(3);
+    $resultChecklistItems   = buscarCheckListItemsDaChecklist(3);
 
     $rowTemplate = mysqli_fetch_assoc($resultTemplate);
 
@@ -70,28 +70,13 @@
         </div>
 
         <?php 
-            usarComponenteComParametros('input_text_form', ['Nome do avaliador:', 'descricao0']);
-            usarComponenteComParametros('input_text_form', ['Versão do artefato:', 'descricao0']); 
+            usarComponenteComParametros('input_text_form', ['Nome do avaliador:', 'nome_avaliador']);
+            usarComponenteComParametros('input_text_form', ['Versão do artefato:', 'versao_artefato']); 
         ?>
         
         <hr>
 
         <div class="mb-3">
-            <div class="mb-3">
-                <button 
-                    type="button" 
-                    class="btn btn-success" 
-                    id="btn_novo_checklist_item" 
-                    name="btn_novo_checklist_item"
-                    onclick="adicionarNovoChecklistItem()"
-                >
-                    +
-                </button>
-                <label for="btn_novo_checklist_item label-adicionar-novo-item">
-                    <span>Adicionar novo item de checklist</span>
-                </label>
-            </div>
-            
             <?php
                 $contador = 0;
                 foreach ($matrizChecklistItems as $arrayChecklistItem) {
@@ -129,6 +114,20 @@
                                 <label for="prazoDias$contador" class="form-label">Prazo em dias para atender a não-conformidade:</label>
                                 <input class="form-control" type="number" name="prazoDias$contador" id="prazoDias$contador" step=1 disabled value="$prazo_em_dias">
                             </div>
+
+                            <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="isConforme$contador" name="isConforme$contador">
+                                <label class="form-check-label" for="isConforme$contador">
+                                    Está conforme
+                                </label>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="observacao$contador" class="form-label">Observação:</label>
+                                <textarea class="form-control" id="observacao$contador" name="observacao$contador" rows="3"></textarea>
+                            </div>
+
+
                         </div>
                     END;
                 }
