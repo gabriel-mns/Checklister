@@ -9,7 +9,7 @@ CREATE TABLE CHECKLIST(
     titulo VARCHAR(255) NOT NULL,
     data_hora_criacao DATETIME NOT NULL,
     versao_checklist int UNSIGNED, 
-    autor_vesao varchar(255) NOT NULL,
+    autor_versao varchar(255) NOT NULL,
 
     PRIMARY KEY (id_checklist, versao_checklist)
 );
