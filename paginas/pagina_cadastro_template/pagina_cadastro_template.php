@@ -48,7 +48,7 @@
                 </label>
             </div>
             
-            <div class="container-checklist-item">
+            <div class="container-checklist-item mb-3">
                 <?php
                     usarComponenteComParametros('input_text_form', ['Descrição:', 'descricao0']);
                     usarComponenteComParametros('input_text_form', ['Nome do responsável pela correção:', 'nomeResponsavelCorrecao0']);

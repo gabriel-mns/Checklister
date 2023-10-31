@@ -2,7 +2,7 @@ var contador = 1;
 
 function adicionarNovoChecklistItem() {
     const template = `
-        <div class="container-checklist-item">
+        <div class="container-checklist-item mb-3">
             <div class="mb-3">
                 <label for="descricao${contador}" class="form-label input_text_form-label">Descrição: </label>
                 <input type="text" class="form-control" id="descricao${contador}" name="descricao${contador}">
