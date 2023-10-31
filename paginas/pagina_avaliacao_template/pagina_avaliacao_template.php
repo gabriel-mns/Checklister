@@ -14,9 +14,12 @@
 </head>
 
 <?php
-    // TODO: NO ARGUMENTO DAS FUNÇÕES ABAIXO TINHA QUE SER O ID OBTIDO PELO MÉTODO GET OU POST
-    $resultTemplate         = buscarDadosDaChecklist(3);
-    $resultChecklistItems   = buscarCheckListItemsDaChecklist(3);
+
+    //O valor padrão é 1, caso nada tenha sido setado
+    $idChecklist = $_GET["idChecklist"] ?? 1;
+
+    $resultTemplate         = buscarDadosDaChecklist($idChecklist);
+    $resultChecklistItems   = buscarCheckListItemsDaChecklist($idChecklist);
 
     $rowTemplate = mysqli_fetch_assoc($resultTemplate);
 
@@ -29,19 +32,16 @@
     $contador = 0;
 
     while($rowChecklistItems = mysqli_fetch_assoc($resultChecklistItems)) {
+
         $arrayChecklistItem = [];
+
         array_push($arrayChecklistItem, $rowChecklistItems['descricao']);
         array_push($arrayChecklistItem, $rowChecklistItems['nome_responsavel_correcao']);
         array_push($arrayChecklistItem, $rowChecklistItems['gravidade_nao_conformidade']);
         array_push($arrayChecklistItem, $rowChecklistItems['prazo_em_dias']);
+        array_push($arrayChecklistItem, $rowChecklistItems['id_checklist_item']);
 
         array_push($matrizChecklistItems, $arrayChecklistItem);
-    }
-
-    foreach ($matrizChecklistItems as $array) {
-        foreach ($array as $valor) {
-            echo $valor;
-        }
     }
 
 ?>
@@ -58,6 +58,8 @@
     </div>
 
     <form id="formCadAvaliacaoTemplate" action="./action/cadastrarAvaliacao.php" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="id_checklist" value="<?=$idChecklist?>">
 
         <div class="mb-3">
             <label for="autor" class="form-label input_text_form-label">Autor da versão atual do template:</label>
@@ -78,7 +80,9 @@
             <?php
                 $contador = 0;
                 foreach ($matrizChecklistItems as $arrayChecklistItem) {
-                    $descricao = $arrayChecklistItem[0];
+
+                    $idChecklistItem = $arrayChecklistItem[4];
+                    $descricao       = $arrayChecklistItem[0];
                     $nome_responsavel_correcao = $arrayChecklistItem[1];
 
                     $atributoSelectedGravidadeBaixa = ($arrayChecklistItem[2] == 'Baixa') ? 'selected' : '';
@@ -89,6 +93,9 @@
 
                     echo <<<END
                         <div class="container-checklist-item mb-3">
+
+                            <input type="hidden" name="idChecklistItem$contador" value="$idChecklistItem">
+
                             <div class="mb-3">
                                 <label for="descricao$contador" class="form-label input_text_form-label">Descrição:</label>
                                 <input type="text" class="form-control" id="descricao$contador" name="descricao$contador" disabled value="$descricao">
