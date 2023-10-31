@@ -212,4 +212,35 @@
         mysqli_commit($conn);
     }
 
+    function buscarTodasAvaliacoes(){
+
+        global $conn;
+
+        $queryBusca = "SELECT * FROM avaliacao";
+
+        return mysqli_query($conn, $queryBusca);
+
+    }
+
+    function buscarDadosAvaliacaoEChecklist(){
+
+        global $conn;
+
+        $queryBusca = "
+            SELECT 
+                c.titulo titulo, 
+                a.data_hora_avaliacao data_hora_avaliacao,
+                c.versao_checklist versao_checklist,
+                a.nome_avaliador nome_avaliador,
+                a.id_avaliacao id_avaliacao
+            FROM 
+                avaliacao a 
+                INNER JOIN checklist c 
+                ON a.id_checklist = c.id_checklist;
+            ";
+
+        return mysqli_query($conn, $queryBusca);
+
+    }
+
 ?>

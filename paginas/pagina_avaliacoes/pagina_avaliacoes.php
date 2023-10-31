@@ -18,7 +18,11 @@
 <div class="container-conteudo">
     <h1 class="titulo">Avaliações</h1>
 
-    <?php usarComponenteComParametros('grid_cards', ["avaliacao"]); ?>
+    <?php 
+
+        usarComponenteComParametros('grid_cards', ['avaliacao']); 
+    
+    ?>
     
 </div>
 </body>
