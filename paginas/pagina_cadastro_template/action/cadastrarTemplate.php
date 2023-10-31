@@ -2,7 +2,8 @@
     include('../../../framework/checklister_framework.php');
 
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        redirect("../../pagina_principal/index.php");
+        header("Location: ../../pagina_principal/index.php");
+        exit();
     }
 
     $nomeAutorVersao                        = $_POST["autor"];
