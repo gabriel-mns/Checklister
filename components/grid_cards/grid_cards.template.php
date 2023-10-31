@@ -30,7 +30,7 @@
         $result = buscarTodosTemplatesCadastrados();
 
         while($row = mysqli_fetch_assoc($result)) {
-            usarComponenteComParametros('card', ['templateJaCadastrado', $row["titulo"], $row["data_hora_criacao"], $row["versao_checklist"], $row["autor_vesao"]]);
+            usarComponenteComParametros('card', ['templateJaCadastrado', $row["titulo"], $row["data_hora_criacao"], $row["versao_checklist"], $row["autor_versao"]]);
         }  
     }
 
@@ -48,7 +48,7 @@
         #$result = buscarTodosTemplatesAvaliados();
 
         // while($row = mysqli_fetch_assoc($result)) {
-        //     usarComponenteComParametros('card', ['avaliacao', $row["titulo"], $row["data_hora_criacao"], $row["versao_checklist"], $row["autor_vesao"]]);
+        //     usarComponenteComParametros('card', ['avaliacao', $row["titulo"], $row["data_hora_criacao"], $row["versao_checklist"], $row["autor_versao"]]);
         // }  
         
         usarComponenteComParametros('card', ['avaliacao', "Avaliação 1", "01/01/2000", "v5", "Rogério Seni"]);

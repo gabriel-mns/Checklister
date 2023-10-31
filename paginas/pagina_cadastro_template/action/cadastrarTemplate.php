@@ -25,7 +25,7 @@
 
     $insertQueryTabelaChecklist = 
         <<<END
-            INSERT INTO checklist (titulo, data_hora_criacao, autor_vesao, versao_checklist) 
+            INSERT INTO checklist (titulo, data_hora_criacao, autor_versao, versao_checklist) 
             VALUES ("$tituloTemplate", NOW(), "$nomeAutorVersao", 1);
         END;
 
