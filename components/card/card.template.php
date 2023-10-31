@@ -9,6 +9,7 @@
         $versaoCardCadastrado      =    $_SESSION['parametrosComponente'][3];
         $autorCardCadastrado       =    $_SESSION['parametrosComponente'][4];
         $idTemplate                =    $_SESSION['parametrosComponente'][5];
+        $taxaAderencia             =    $_SESSION['parametrosComponente'][6];
     }
 
     if ($tipoCard == 'novoTemplate') {
@@ -55,7 +56,8 @@
 
                     <p class="card-subtitulo">Avaliado em: $dataCriacaoCardCadastrado</p>
                     <p class="card-subtitulo">Versão do template: $versaoCardCadastrado</p>
-                    <p class="card-subtitulo card-ultimo-subtitulo">Avaliador: $autorCardCadastrado</p>
+                    <p class="card-subtitulo">Avaliador: $autorCardCadastrado</p>
+                    <p class="card-subtitulo card-ultimo-subtitulo">Taxa de aderência: $taxaAderencia%</p>
                 </div>
                 <div class="card-container-botao">
                     <button type="button" class="btn btn-success" id="card-btn-avaliar" name="card-btn-avaliar">

@@ -243,4 +243,42 @@
 
     }
 
+    function buscarQtdeAvaliacoesDaAvalaiacao($idAvaliacao){
+
+        global $conn;
+
+        $queryBuscaQtde = "SELECT COUNT(*) FROM avaliacao_checklist_item WHERE id_avaliacao =" . $idAvaliacao;
+
+        return mysqli_query($conn, $queryBuscaQtde);
+
+    }
+
+    function buscarResultadosAvaliacao(int $idAvaliacao){
+
+        global $conn;
+
+        $queryBuscarResultados = "SELECT isConforme FROM avaliacao_checklist_item WHERE id_avaliacao =". $idAvaliacao;
+
+        return mysqli_query($conn, $queryBuscarResultados);
+
+    }
+
+    function calcularAderenciaDaAvaliacao(int $idAvaliacao){
+
+        $resultados = buscarResultadosAvaliacao($idAvaliacao);
+        $qtdeChecklistItems = mysqli_fetch_array(buscarQtdeAvaliacoesDaAvalaiacao($idAvaliacao))[0];
+        $qtdeDeResultadosConformes = 0;
+
+        while($resultado = mysqli_fetch_assoc($resultados)){
+
+            if($resultado["isConforme"] == 1) $qtdeDeResultadosConformes++;
+
+        }
+
+        $taxa = ($qtdeDeResultadosConformes/$qtdeChecklistItems) * 100;
+        $taxaFormatada = number_format($taxa,1,",",".");
+
+        return $taxaFormatada;
+
+    }
 ?>

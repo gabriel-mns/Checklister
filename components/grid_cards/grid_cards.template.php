@@ -51,7 +51,10 @@
         $avaliacoes = buscarDadosAvaliacaoEChecklist();
         
         while($row = mysqli_fetch_assoc($avaliacoes)) {
-            usarComponenteComParametros('card', ['avaliacao', $row["titulo"], $row["data_hora_avaliacao"], $row["versao_checklist"], $row["nome_avaliador"], $row["id_avaliacao"]]);
+
+            $taxaAderencia = calcularAderenciaDaAvaliacao($row["id_avaliacao"]);
+
+            usarComponenteComParametros('card', ['avaliacao', $row["titulo"], $row["data_hora_avaliacao"], $row["versao_checklist"], $row["nome_avaliador"], $row["id_avaliacao"], $taxaAderencia]);
         }  
 
         //usarComponenteComParametros('card', ['avaliacao', "Avaliação 1", "01/01/2000", "v5", "Rogério Seni"]);
