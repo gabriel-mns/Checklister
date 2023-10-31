@@ -27,7 +27,7 @@
     <form id="formCadTemplate" action="./action/cadastrarTemplate.php" method="post" enctype="multipart/form-data">
         <?php 
             usarComponenteComParametros('input_text_form', ['Autor da versão atual:', 'autor']); 
-            usarComponenteComParametros('input_text_form', ['Título:', 'titulo']); 
+            usarComponenteComParametros('input_text_form', ['Título do artefato:', 'titulo']); 
         ?>
         
         <hr>
