@@ -45,3 +45,16 @@ html {
 .botao-cancelar {
     text-decoration: none;
 }
+
+.container-calculo-aderencia {
+    background-color: #DEF1E8;
+    border: 1px solid #198754;
+    padding: 0px 15px 20px 15px;
+    margin-bottom: 30px;
+    color: #198754;
+    border-radius: 6px;
+}
+
+.porcentagem-aderencia {
+    font-size: 64px;
+}

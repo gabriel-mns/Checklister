@@ -65,6 +65,11 @@
         <h1 class="versao">Versão template: <?=$versao_template?>.0</h1>
     </div>
 
+    <div class="container-calculo-aderencia">
+        <div class="porcentagem-aderencia"><?=calcularAderenciaDaAvaliacao($idAvaliacao)?>%</div>
+        <div>Taxa de aderência</div>
+    </div>
+
     <form id="formCadAvaliacaoTemplate" action="./action/cadastrarAvaliacao.php" method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
