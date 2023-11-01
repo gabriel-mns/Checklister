@@ -232,7 +232,8 @@
                 a.data_hora_avaliacao data_hora_avaliacao,
                 c.versao_checklist versao_checklist,
                 a.nome_avaliador nome_avaliador,
-                a.id_avaliacao id_avaliacao
+                a.id_avaliacao id_avaliacao,
+                c.id_checklist id_checklist
             FROM 
                 avaliacao a 
                 INNER JOIN checklist c 
@@ -260,6 +261,29 @@
         $queryBuscarResultados = "SELECT isConforme FROM avaliacao_checklist_item WHERE id_avaliacao =". $idAvaliacao;
 
         return mysqli_query($conn, $queryBuscarResultados);
+
+    }
+
+    function buscarResultadoAvaliacaoItemChecklistEspecifico(int $idAvaliacao, int $idChecklistItem) {
+
+        global $conn;
+
+        $queryBuscarResultadoChecklistItem = 
+            <<<END
+                SELECT * FROM avaliacao_checklist_item WHERE id_avaliacao = $idAvaliacao AND id_checklist_item = $idChecklistItem;
+            END;
+
+        return mysqli_query($conn, $queryBuscarResultadoChecklistItem);
+
+    }
+
+    function buscarCabecalhoAvaliacao(int $idAvaliacao) {
+        
+        global $conn;
+
+        $queryBuscarCabecalho = "SELECT * FROM avaliacao WHERE id_avaliacao =". $idAvaliacao;
+
+        return mysqli_query($conn, $queryBuscarCabecalho);
 
     }
 

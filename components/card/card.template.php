@@ -3,14 +3,23 @@
     
     $tipoCard = $_SESSION['parametrosComponente'][0]; #novoTemplate, templateJaCadastrado, avaliacao
 
-    if ($tipoCard != 'novoTemplate') {
+    if ($tipoCard == 'templateJaCadastrado') {
         $tituloCardCadastrado      =    $_SESSION['parametrosComponente'][1];
         $dataCriacaoCardCadastrado =    $_SESSION['parametrosComponente'][2];
         $versaoCardCadastrado      =    $_SESSION['parametrosComponente'][3];
         $autorCardCadastrado       =    $_SESSION['parametrosComponente'][4];
         $idTemplate                =    $_SESSION['parametrosComponente'][5];
-        $taxaAderencia             =    $_SESSION['parametrosComponente'][6];
     }
+    if ($tipoCard == 'avaliacao') {
+        $tituloCardAvaliado     =    $_SESSION['parametrosComponente'][1];
+        $dataHoraAvaliacao      =    $_SESSION['parametrosComponente'][2];
+        $versaoCardAvaliado     =    $_SESSION['parametrosComponente'][3];
+        $nomeAvaliador          =    $_SESSION['parametrosComponente'][4];
+        $idTemplate             =    $_SESSION['parametrosComponente'][5];
+        $idAvaliacao            =    $_SESSION['parametrosComponente'][6];
+        $taxaAderencia          =    $_SESSION['parametrosComponente'][7];
+    }
+
 
     if ($tipoCard == 'novoTemplate') {
         echo <<<END
@@ -52,20 +61,20 @@
         echo <<<END
             <div class="card-container card-container-template-cadastrado">
                 <div class="card-container-texto">
-                    <h2 class="card-titulo">$tituloCardCadastrado</h2>
+                    <h2 class="card-titulo">$tituloCardAvaliado</h2>
 
-                    <p class="card-subtitulo">Avaliado em: $dataCriacaoCardCadastrado</p>
-                    <p class="card-subtitulo">Versão do template: $versaoCardCadastrado</p>
-                    <p class="card-subtitulo">Avaliador: $autorCardCadastrado</p>
+                    <p class="card-subtitulo">Avaliado em: $dataHoraAvaliacao</p>
+                    <p class="card-subtitulo">Versão do template: $versaoCardAvaliado</p>
+                    <p class="card-subtitulo">Avaliador: $nomeAvaliador</p>
                     <p class="card-subtitulo card-ultimo-subtitulo">Taxa de aderência: $taxaAderencia%</p>
                 </div>
                 <div class="card-container-botao">
-                    <button type="button" class="btn btn-success" id="card-btn-avaliar" name="card-btn-avaliar">
+                    <a href="../pagina_visualizacao_avaliacao/pagina_visualizacao_avaliacao.php?idChecklist=$idTemplate&idAvaliacao=$idAvaliacao" type="button" class="btn btn-success" id="card-btn-avaliar" name="card-btn-avaliar">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" viewBox="0 -960 960 960" width="24">
                             <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
                         </svg>    
                         Visualizar
-                    </button>
+                    </a>
                 </div>
             </div>
         END;

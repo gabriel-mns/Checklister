@@ -30,7 +30,7 @@
         $result = buscarTodosTemplatesCadastrados();
 
         while($row = mysqli_fetch_assoc($result)) {
-            usarComponenteComParametros('card', ['templateJaCadastrado', $row["titulo"], $row["data_hora_criacao"], $row["versao_checklist"], $row["autor_versao"], $row["id_checklist"], $row["id_checklist"]]);
+            usarComponenteComParametros('card', ['templateJaCadastrado', $row["titulo"], $row["data_hora_criacao"], $row["versao_checklist"], $row["autor_versao"], $row["id_checklist"]]);
         }  
     }
 
@@ -54,7 +54,7 @@
 
             $taxaAderencia = calcularAderenciaDaAvaliacao($row["id_avaliacao"]);
 
-            usarComponenteComParametros('card', ['avaliacao', $row["titulo"], $row["data_hora_avaliacao"], $row["versao_checklist"], $row["nome_avaliador"], $row["id_avaliacao"], $taxaAderencia]);
+            usarComponenteComParametros('card', ['avaliacao', $row["titulo"], $row["data_hora_avaliacao"], $row["versao_checklist"], $row["nome_avaliador"], $row["id_checklist"], $row["id_avaliacao"], $taxaAderencia]);
         }  
 
         //usarComponenteComParametros('card', ['avaliacao', "Avaliação 1", "01/01/2000", "v5", "Rogério Seni"]);
