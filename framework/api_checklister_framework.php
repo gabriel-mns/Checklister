@@ -3,6 +3,11 @@
     #Imports
     //require("conexaoBancoDados.php");
 
+    /*
+
+        MÉTODOS DE BUSCA
+
+    */
     function buscarTodosTemplatesCadastrados() {
 
         global $conn;
@@ -16,19 +21,33 @@
         return mysqli_query($conn, $queryBuscarTodosTemplates);
     }
 
-    function buscarTodosItensChecklistDaChecklist(int $idChecklist) {
+    function buscarDadosChecklistItem(int $idChecklistItem){
 
         global $conn;
 
-        $queryBuscarTodosItensChecklistDaChecklist = 
-            <<<END
-                SELECT *
-                FROM CHECKLIST_ITEM
-                WHERE
-                    id_checklist = $idChecklist;
-            END;
+        $querySelectDadosChecklist = "SELECT * FROM checklist_item WHERE id_checklist_item = " . $idChecklistItem;
 
-        return mysqli_query($conn, $queryBuscarTodosItensChecklistDaChecklist);
+        return mysqli_query($conn, $querySelectDadosChecklist);
+        
+    }
+
+    function buscarDadosDaChecklist(int $idChecklist){
+
+        global $conn;
+
+        $querySelectDadosChecklist = "SELECT * FROM checklist WHERE id_checklist = " . $idChecklist;
+
+        return mysqli_query($conn, $querySelectDadosChecklist);
+
+    }
+
+    function buscarCheckListItemsDaChecklist(int $idChecklist){
+
+        global $conn;
+
+        $querySelectTodosChecklistItems = "SELECT * FROM checklist_item WHERE id_checklist = " . $idChecklist;
+
+        return mysqli_query($conn,$querySelectTodosChecklistItems);
 
     }
 
@@ -47,6 +66,65 @@
         return mysqli_query($conn, $queryBuscarTodosOsItensAvaliacaoDaAvaliacao);
 
     }
+    
+    function buscarTodasAvaliacoes(){
+
+        global $conn;
+
+        $queryBusca = "SELECT * FROM avaliacao";
+
+        return mysqli_query($conn, $queryBusca);
+
+    }
+
+    function buscarDadosAvaliacaoEChecklist(){
+
+        global $conn;
+
+        $queryBusca = "
+            SELECT 
+                c.titulo titulo, 
+                a.data_hora_avaliacao data_hora_avaliacao,
+                c.versao_checklist versao_checklist,
+                a.nome_avaliador nome_avaliador,
+                a.id_avaliacao id_avaliacao
+            FROM 
+                avaliacao a 
+                INNER JOIN checklist c 
+                ON a.id_checklist = c.id_checklist;
+            ";
+
+        return mysqli_query($conn, $queryBusca);
+
+    }
+
+    function buscarQtdeAvaliacoesDaAvalaiacao($idAvaliacao){
+
+        global $conn;
+
+        $queryBuscaQtde = "SELECT COUNT(*) FROM avaliacao_checklist_item WHERE id_avaliacao =" . $idAvaliacao;
+
+        return mysqli_query($conn, $queryBuscaQtde);
+
+    }
+
+    function buscarResultadosAvaliacao(int $idAvaliacao){
+
+        global $conn;
+
+        $queryBuscarResultados = "SELECT isConforme FROM avaliacao_checklist_item WHERE id_avaliacao =". $idAvaliacao;
+
+        return mysqli_query($conn, $queryBuscarResultados);
+
+    }
+
+
+
+    /*
+
+        MÉTODOS DE ATUALIZAR
+
+    */
 
     function atualizarDadosChecklist(int $idChecklist, string $titulo, string $autorVersao){
 
@@ -112,33 +190,80 @@
 
     }
 
-    function buscarDadosChecklistItem(int $idChecklistItem){
+    function atualizarTemplate($idTemplate,$nomeAutorVersao, $tituloTemplate, $checklistItemsDeletar, $checklistItemsAtualizar, $checklistItemsInserir){
 
         global $conn;
 
-        $querySelectDadosChecklist = "SELECT * FROM checklist_item WHERE id_checklist_item = " . $idChecklistItem;
+        mysqli_begin_transaction($conn);
 
-        return mysqli_query($conn, $querySelectDadosChecklist);
-        
+        //Atualiza a tabela CHECKLIST
+        atualizarDadosChecklist($idTemplate, $tituloTemplate, $nomeAutorVersao);
+
+        //Para cada item a ser deletado, deleta o item
+        foreach($checklistItemsDeletar as $itemDeletar){
+
+            //$itemDeletar[0] é o id_checklist_item
+            removerChecklistItem($itemDeletar[0]);
+
+        }
+
+        //Para cada item a ser deletado, deleta o item
+        foreach($checklistItemsAtualizar as $itemAtualizar){
+
+            atualizarDadosCheckListItem(
+                $itemAtualizar[0], //id_checklist_item
+                $itemAtualizar[1], //descricao
+                $itemAtualizar[2], //nomeResponsavelCorrecao
+                $itemAtualizar[3], //gravidade
+                $itemAtualizar[4]  //prazoDias
+            );
+
+        }
+
+        //Para cada item a ser deletado, deleta o item
+        foreach($checklistItemsInserir as $itemCadastrar){
+
+            cadastrarChecklistItem(
+                $itemCadastrar[0], //id_checklist_item
+                $itemCadastrar[1], //descricao
+                $itemCadastrar[2], //nomeRespCorrecao
+                $itemCadastrar[3], //gravidade
+                $itemCadastrar[4]  //prazoEmDias
+            );
+
+        }
+    
+
+        mysqli_commit($conn);
+
     }
 
-    function buscarDadosDaChecklist(int $idChecklist){
+    
+    /*
+
+        MÉTODOS DE CADASTRAR
+
+    */
+
+    function cadastrarChecklistItem(int $idChecklist, string $descricao, string $nomeRespCorrecao, string $gravidade, int $prazoDias){
 
         global $conn;
 
-        $querySelectDadosChecklist = "SELECT * FROM checklist WHERE id_checklist = " . $idChecklist;
+        $queryInsert = <<<END
 
-        return mysqli_query($conn, $querySelectDadosChecklist);
+            INSERT INTO
+                checklist_item (id_checklist, descricao, nome_responsavel_correcao, gravidade_nao_conformidade, prazo_em_dias)
+            VALUES(
+                $idChecklist,
+                $descricao,
+                $nomeRespCorrecao,
+                $gravidade,
+                $prazoDias
+            )
 
-    }
+        END;
 
-    function buscarCheckListItemsDaChecklist(int $idChecklist){
-
-        global $conn;
-
-        $querySelectTodosChecklistItems = "SELECT * FROM checklist_item WHERE id_checklist = " . $idChecklist;
-
-        return mysqli_query($conn,$querySelectTodosChecklistItems);
+        mysqli_query($conn,$queryInsert);
 
     }
 
@@ -212,57 +337,6 @@
         mysqli_commit($conn);
     }
 
-    function buscarTodasAvaliacoes(){
-
-        global $conn;
-
-        $queryBusca = "SELECT * FROM avaliacao";
-
-        return mysqli_query($conn, $queryBusca);
-
-    }
-
-    function buscarDadosAvaliacaoEChecklist(){
-
-        global $conn;
-
-        $queryBusca = "
-            SELECT 
-                c.titulo titulo, 
-                a.data_hora_avaliacao data_hora_avaliacao,
-                c.versao_checklist versao_checklist,
-                a.nome_avaliador nome_avaliador,
-                a.id_avaliacao id_avaliacao
-            FROM 
-                avaliacao a 
-                INNER JOIN checklist c 
-                ON a.id_checklist = c.id_checklist;
-            ";
-
-        return mysqli_query($conn, $queryBusca);
-
-    }
-
-    function buscarQtdeAvaliacoesDaAvalaiacao($idAvaliacao){
-
-        global $conn;
-
-        $queryBuscaQtde = "SELECT COUNT(*) FROM avaliacao_checklist_item WHERE id_avaliacao =" . $idAvaliacao;
-
-        return mysqli_query($conn, $queryBuscaQtde);
-
-    }
-
-    function buscarResultadosAvaliacao(int $idAvaliacao){
-
-        global $conn;
-
-        $queryBuscarResultados = "SELECT isConforme FROM avaliacao_checklist_item WHERE id_avaliacao =". $idAvaliacao;
-
-        return mysqli_query($conn, $queryBuscarResultados);
-
-    }
-
     function calcularAderenciaDaAvaliacao(int $idAvaliacao){
 
         $resultados = buscarResultadosAvaliacao($idAvaliacao);
@@ -281,4 +355,31 @@
         return $taxaFormatada;
 
     }
+
+
+    /*
+
+        MÉTODOS DE REMOÇÃO
+
+    */
+
+    function removerChecklistItem($idChecklistItem){
+
+        global $conn;
+
+        $queryRemocao = "
+
+            DELETE FROM
+                checklist_item
+            WHERE
+                id_checklist_item = $idChecklistItem;
+
+        ";
+
+        mysqli_query($conn, $queryRemocao);
+
+    }
+
 ?>
+    
+
