@@ -9,6 +9,15 @@
         $versaoCardCadastrado      =    $_SESSION['parametrosComponente'][3];
         $autorCardCadastrado       =    $_SESSION['parametrosComponente'][4];
         $idTemplate                =    $_SESSION['parametrosComponente'][5];
+
+        $linkEdicao = <<<END
+            <a href="../pagina_edicao_template/pagina_edicao_template.php?idTemplate=$idTemplate" class="btn btn-success" id="card-btn-avaliar" name="card-btn-avaliar">
+                <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M80 0v-160h800V0H80Zm160-320h56l312-311-29-29-28-28-311 312v56Zm-80 80v-170l448-447q11-11 25.5-17t30.5-6q16 0 31 6t27 18l55 56q12 11 17.5 26t5.5 31q0 15-5.5 29.5T777-687L330-240H160Zm560-504-56-56 56 56ZM608-631l-29-29-28-28 57 57Z"/></svg> 
+            </a>
+        END;
+
+        $temAvaliacao = mysqli_fetch_array(buscarQtdeAvaliacaoComTemplate($idTemplate))[0] > 0;
+        $linkEdicao   = $temAvaliacao ? '' : $linkEdicao; 
     }
     if ($tipoCard == 'avaliacao') {
         $tituloCardAvaliado     =    $_SESSION['parametrosComponente'][1];
@@ -47,9 +56,7 @@
                     <p class="card-subtitulo card-ultimo-subtitulo">Autor: $autorCardCadastrado</p>
                 </div>
                 <div class="card-container-botao">
-                    <a href="../pagina_edicao_template/pagina_edicao_template.php?idTemplate=$idTemplate" class="btn btn-success" id="card-btn-avaliar" name="card-btn-avaliar">
-                        <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M80 0v-160h800V0H80Zm160-320h56l312-311-29-29-28-28-311 312v56Zm-80 80v-170l448-447q11-11 25.5-17t30.5-6q16 0 31 6t27 18l55 56q12 11 17.5 26t5.5 31q0 15-5.5 29.5T777-687L330-240H160Zm560-504-56-56 56 56ZM608-631l-29-29-28-28 57 57Z"/></svg> 
-                    </a>
+                    $linkEdicao
                     <a href="../pagina_avaliacao_template/pagina_avaliacao_template.php?idChecklist=$idTemplate" class="btn btn-success" id="card-btn-avaliar" name="card-btn-avaliar">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="24" viewBox="0 -960 960 960" width="24">
                             <path d="m499-287 335-335-52-52-335 335 52 52Zm-261 87q-100-5-149-42T40-349q0-65 53.5-105.5T242-503q39-3 58.5-12.5T320-542q0-26-29.5-39T193-600l7-80q103 8 151.5 41.5T400-542q0 53-38.5 83T248-423q-64 5-96 23.5T120-349q0 35 28 50.5t94 18.5l-4 80Zm280 7L353-358l382-382q20-20 47.5-20t47.5 20l70 70q20 20 20 47.5T900-575L518-193Zm-159 33q-17 4-30-9t-9-30l33-159 165 165-159 33Z"/>

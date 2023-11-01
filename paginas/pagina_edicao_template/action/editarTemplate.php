@@ -37,8 +37,11 @@
         //Se for para deletar
         if($deletarAtual){
 
+            //Insere o idTemplate
+            array_unshift($itemAtual,$_POST["checklistItemId". $contador]);
+
             //Insere no array de deletar
-            array_push($checklistItemsDeletar, $itemAtual );
+            array_push($checklistItemsDeletar, $itemAtual, $idTemplate);
 
         //Se for para atualizar
         } else if(isset($_POST["checklistItemId". $contador])) {
@@ -47,6 +50,9 @@
             array_push($checklistItemsAtualizar, $itemAtual );
 
         } else {
+
+            //Insere o idTemplate
+            array_unshift($itemAtual,$idTemplate);
 
             //Insere no array de inserir
             array_push($checklistItemsInserir, $itemAtual );
