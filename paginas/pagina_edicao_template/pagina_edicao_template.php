@@ -90,28 +90,28 @@
 
                             <div class="mb-3">
                                 <label for="descricao$contador" class="form-label input_text_form-label">Descrição: </label>
-                                <input type="text" class="form-control" id="descricao$contador" name="descricao$contador" value="$descricao">
+                                <input type="text" class="form-control" id="descricao$contador" name="descricao$contador" value="$descricao" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="nomeResponsavelCorrecao$contador" class="form-label input_text_form-label">Nome do responsável pela correção: </label>
-                                <input type="text" class="form-control" id="nomeResponsavelCorrecao$contador" name="nomeResponsavelCorrecao$contador" value="$nomeResponsavelCorrecao">
+                                <input type="text" class="form-control" id="nomeResponsavelCorrecao$contador" name="nomeResponsavelCorrecao$contador" value="$nomeResponsavelCorrecao" required>
                             </div>
 
 
                             <div class="mb-3">
                                 <label for="gravidade$contador" class="form-label">Gravidade da não-conformidade:</label>
-                                <select class="form-select" name="gravidade$contador" id="gravidade$contador">
-                                    <option value="1" $atributoSelectedGravidadeBaixa >Baixa</option>
-                                    <option value="2" $atributoSelectedGravidadeMedia >Média</option>
-                                    <option value="3" $atributoSelectedGravidadeAlta  >Alta</option>
+                                <select class="form-select" name="gravidade$contador" id="gravidade$contador" required>
+                                    <option value="Baixa" $atributoSelectedGravidadeBaixa >Baixa</option>
+                                    <option value="Média" $atributoSelectedGravidadeMedia >Média</option>
+                                    <option value="Alta"  $atributoSelectedGravidadeAlta  >Alta</option>
                                 </select>
                             </div>
 
                             
                             <div class="mb-3">
                                 <label for="prazoDias$contador" class="form-label">Prazo em dias para atender a não-conformidade:</label>
-                                <input class="form-control" type="number" name="prazoDias$contador" id="prazoDias$contador" step=1 value="$prazoEmDias">
+                                <input class="form-control" type="number" name="prazoDias$contador" id="prazoDias$contador" step=1 value="$prazoEmDias" required>
                             </div>
 
                             <div class="mb-3">

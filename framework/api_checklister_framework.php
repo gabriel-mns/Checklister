@@ -122,7 +122,7 @@
 
     }
 
-    function buscarQtdeAvaliacoesDaAvalaiacao($idAvaliacao){
+    function buscarQtdeAvaliacoesDaAvaliacao($idAvaliacao){
 
         global $conn;
 
@@ -137,6 +137,16 @@
         global $conn;
 
         $queryBuscarResultados = "SELECT isConforme FROM avaliacao_checklist_item WHERE id_avaliacao =". $idAvaliacao;
+
+        return mysqli_query($conn, $queryBuscarResultados);
+
+    }
+
+    function buscarQtdeAvaliacaoComTemplate($idTemplate){
+
+        global $conn;
+
+        $queryBuscarResultados = "SELECT COUNT(*) FROM avaliacao WHERE id_checklist =". $idTemplate;
 
         return mysqli_query($conn, $queryBuscarResultados);
 
@@ -248,11 +258,11 @@
         foreach($checklistItemsInserir as $itemCadastrar){
 
             cadastrarChecklistItem(
-                $itemCadastrar[0], //id_checklist_item
+                $itemCadastrar[0], //id_checklist
                 $itemCadastrar[1], //descricao
                 $itemCadastrar[2], //nomeRespCorrecao
                 $itemCadastrar[3], //gravidade
-                $itemCadastrar[4]  //prazoEmDias
+                $itemCadastrar[4] == '' ? 1 : $itemCadastrar[4]  //prazoEmDias
             );
 
         }
@@ -268,8 +278,7 @@
         MÉTODOS DE CADASTRAR
 
     */
-
-    function cadastrarChecklistItem(int $idChecklist, string $descricao, string $nomeRespCorrecao, string $gravidade, int $prazoDias){
+    function cadastrarChecklistItem($idChecklist, string $descricao, string $nomeRespCorrecao, string $gravidade, int $prazoDias){
 
         global $conn;
 
@@ -279,9 +288,9 @@
                 checklist_item (id_checklist, descricao, nome_responsavel_correcao, gravidade_nao_conformidade, prazo_em_dias)
             VALUES(
                 $idChecklist,
-                $descricao,
-                $nomeRespCorrecao,
-                $gravidade,
+                '$descricao',
+                '$nomeRespCorrecao',
+                '$gravidade',
                 $prazoDias
             )
 
@@ -364,7 +373,7 @@
     function calcularAderenciaDaAvaliacao(int $idAvaliacao){
 
         $resultados = buscarResultadosAvaliacao($idAvaliacao);
-        $qtdeChecklistItems = mysqli_fetch_array(buscarQtdeAvaliacoesDaAvalaiacao($idAvaliacao))[0];
+        $qtdeChecklistItems = mysqli_fetch_array(buscarQtdeAvaliacoesDaAvaliacao($idAvaliacao))[0];
         $qtdeDeResultadosConformes = 0;
 
         while($resultado = mysqli_fetch_assoc($resultados)){
@@ -387,7 +396,7 @@
 
     */
 
-    function removerChecklistItem($idChecklistItem){
+    function removerChecklistItem(int $idChecklistItem){
 
         global $conn;
 
