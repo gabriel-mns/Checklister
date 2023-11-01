@@ -95,43 +95,4 @@ INSERT INTO checklist_item (id_checklist, descricao, nome_responsavel_correcao, 
 VALUES (2, "Caso haja, Para todos os fluxos alternativos estão identificados os pontos de chamada no fluxo básico?", "Guilherme", "Baixa", 15 );
 
 
-INSERT INTO avaliacao (id_checklist, data_hora_avaliacao, versao_artefato, nome_avaliador) 
-		VALUES (1, "2023-11-05 08:07:10", "1", "Gabriel");
-INSERT INTO avaliacao (id_checklist, data_hora_avaliacao, versao_artefato, nome_avaliador) 
-		VALUES (2, "2023-11-05 08:30:10", "1", "Guilherme");
-
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (1, 1, false, "Requisito não está completo");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (1, 2, true, "");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (1, 3, false, "Requisito requer mais características únicas, vários se repetem" );
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (1, 4, true, "");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (1, 5, false, "Muitos requisitos não deveriam existir");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (1, 6, true, "");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (1, 7, false, "Requisitos escrito de maneira ambígua" );
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (1, 8, true, "");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (1, 9, false, "Requisito não haver com o escopo do projeto");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (2, 10, true, "");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (2, 11, true,"");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (2, 12, false, "Difícil distinção entre ator principal e secundário, muitas vezes assumindo mesmos papeis");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (2, 13, true, "");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (2, 14, true, "");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (2, 15, true, "");
-INSERT INTO avaliacao_checklist_item (id_avaliacao, id_checklist_item, isConforme, observacao) 
-		VALUES (2, 16, true, "");
-
-
 
